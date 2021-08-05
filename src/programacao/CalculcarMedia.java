@@ -13,8 +13,8 @@ public class CalculcarMedia {
         valores[2] = 12;
         
         double result = media(valores);
-        double mediaround = result;
-        System.out.println("media = " + result);
+        double mediaround = Arredondamento.arredondarValor(result);
+        System.out.println("media = " + mediaround);
     }
     
     private static double media(int[] nums){
