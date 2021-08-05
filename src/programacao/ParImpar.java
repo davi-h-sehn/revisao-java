@@ -11,9 +11,9 @@ public class ParImpar {
         int[] vetor = new int[5];
         vetor[0] = 1;
         vetor[1] = 2;
-        vetor[2] = 1;
-        vetor[3] = 2;
-        vetor[4] = 1;
+        vetor[2] = 3;
+        vetor[3] = 4;
+        vetor[4] = 5;
 
         funcao(vetor);
     }
