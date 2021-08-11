@@ -8,7 +8,7 @@ public class Revisao {
 
     public static void main(String[] args) {
         
-        ParImpar objeto = new ParImpar();
+        Tools objeto = new Tools();
         objeto.verificaparimpar(5);
         objeto.verificaparimpar(20);
 
