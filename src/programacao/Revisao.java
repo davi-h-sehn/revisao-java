@@ -7,6 +7,10 @@ package programacao;
 public class Revisao {
 
     public static void main(String[] args) {
+        
+        ParImpar objeto = new ParImpar();
+        objeto.verificaparimpar(5);
+        objeto.verificaparimpar(20);
 
         int tabuada = 10;
         

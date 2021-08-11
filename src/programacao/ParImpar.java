@@ -6,31 +6,12 @@ package programacao;
  */
 public class ParImpar {
     
-    public static void main(String[] args) {
-        
-        int[] vetor = new int[5];
-        vetor[0] = 1;
-        vetor[1] = 2;
-        vetor[2] = 3;
-        vetor[3] = 4;
-        vetor[4] = 5;
-
-        funcao(vetor);
-    }
-    
-    private static void funcao(int[] vetor){
-        int par = 0;
-        int impar = 0;
-        
-        for(int i = 0; i < vetor.length; i++){
-            if(vetor[i]%2 == 0){
-                par++;
+    public void verificaparimpar(int nmr){        
+            if(nmr%2 == 0){
+                System.out.println("é par");
             } else {
-                impar++;
+                System.out.println("é impar");
             }
-        }
-        System.out.println("impar = " + impar);
-        System.out.println("par = " + par);
     }
     
 }
