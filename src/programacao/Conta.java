@@ -57,19 +57,19 @@ public class Conta {
     }
     
     public void sacar(double saque){
-        double novoSaldo = this.saldo - saque;
-        this.saldo = novoSaldo;
+        this.saldo -= saque;
     }
     
     public void depositar(double deposito){
-        double novoSaldo = this.saldo + deposito;
-        this.saldo = novoSaldo;
+        this.saldo += deposito;
     }
     
     //saca da primeira conta e deposita na segunda
-    public void transfer(Conta conta2, double valor){
-        this.saldo = this.saldo - valor;
-        conta2.setSaldo(conta2.getSaldo() + valor);
+    public void transfer(Conta contaTrans, double valor){
+        //this.saldo -= valor;
+        //contaTrans.setSaldo(contaTrans.getSaldo() + valor);
+        sacar(valor);
+        contaTrans.depositar(valor);
     }
     
 }
