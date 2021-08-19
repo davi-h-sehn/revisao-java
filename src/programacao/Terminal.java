@@ -5,10 +5,14 @@
  */
 package programacao;
 
+import javax.swing.UIManager;
+
 /**
  *
  * @author davi.sehn
  */
+import com.formdev.flatlaf.FlatDarculaLaf;
+import java.awt.Color;
 public class Terminal extends javax.swing.JFrame {
 
     Conta conta1, conta2;
@@ -18,8 +22,8 @@ public class Terminal extends javax.swing.JFrame {
     public Terminal() {
         initComponents();
         
-        conta1 = new Conta(1, 123, "davi", 500);
-        conta2 = new Conta(2, 153, "i", 900);
+        conta1 = new Conta(1, 123, "davi", 500, 2000);
+        conta2 = new Conta(2, 153, "i", 900, 2000);
                 
         imprimeConta1();
         imprimeConta2();
@@ -29,12 +33,22 @@ public class Terminal extends javax.swing.JFrame {
     
     public void imprimeConta1(){
         lblNome1.setText(conta1.getNome());
-        lblValor1.setText(Tools.formataValor(conta1.getSaldo()));
+        if(conta1.getSaldo() >= 0){
+            lblValor1.setForeground(new java.awt.Color(124, 179, 66));
+        } else {
+            lblValor1.setForeground(new java.awt.Color(255, 87, 34));
+        }
+        lblValor1.setText(Tools.formataValor(conta1.getSaldo(), true));
     }
     
     public void imprimeConta2(){
         lblNome2.setText(conta2.getNome());
-        lblValor2.setText(Tools.formataValor(conta2.getSaldo()));
+        if(conta2.getSaldo() >= 0){
+            lblValor2.setForeground(new java.awt.Color(124, 179, 66));
+        } else {
+            lblValor2.setForeground(new java.awt.Color(255, 87, 34));
+        }
+        lblValor2.setText(Tools.formataValor(conta2.getSaldo(), true));
     }
 
     /**
@@ -54,6 +68,7 @@ public class Terminal extends javax.swing.JFrame {
         lblValor1 = new javax.swing.JLabel();
         btnSaque1 = new javax.swing.JButton();
         btnDeposito1 = new javax.swing.JButton();
+        btnTransfere1 = new javax.swing.JButton();
         jpnConta2 = new javax.swing.JPanel();
         lblConta2 = new javax.swing.JLabel();
         txtValor2 = new javax.swing.JTextField();
@@ -62,6 +77,7 @@ public class Terminal extends javax.swing.JFrame {
         lblValor2 = new javax.swing.JLabel();
         btnSaque2 = new javax.swing.JButton();
         btnDeposito2 = new javax.swing.JButton();
+        btnTransfere2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,14 +109,22 @@ public class Terminal extends javax.swing.JFrame {
             }
         });
 
+        btnTransfere1.setText("Transferir");
+        btnTransfere1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransfere1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnConta1Layout = new javax.swing.GroupLayout(jpnConta1);
         jpnConta1.setLayout(jpnConta1Layout);
         jpnConta1Layout.setHorizontalGroup(
             jpnConta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnConta1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnConta1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpnConta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnConta1Layout.createSequentialGroup()
+                .addGroup(jpnConta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnTransfere1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnConta1Layout.createSequentialGroup()
                         .addGroup(jpnConta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lblSaldo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblConta1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
@@ -108,9 +132,9 @@ public class Terminal extends javax.swing.JFrame {
                         .addGroup(jpnConta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblNome1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                             .addComponent(lblValor1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jpnConta1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnConta1Layout.createSequentialGroup()
                         .addGroup(jpnConta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnSaque1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                            .addComponent(btnSaque1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                             .addComponent(txtValor1, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addComponent(btnDeposito1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -133,6 +157,8 @@ public class Terminal extends javax.swing.JFrame {
                 .addGroup(jpnConta1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaque1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDeposito1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTransfere1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -164,22 +190,31 @@ public class Terminal extends javax.swing.JFrame {
             }
         });
 
+        btnTransfere2.setText("Transferir");
+        btnTransfere2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransfere2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnConta2Layout = new javax.swing.GroupLayout(jpnConta2);
         jpnConta2.setLayout(jpnConta2Layout);
         jpnConta2Layout.setHorizontalGroup(
             jpnConta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnConta2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnConta2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpnConta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnConta2Layout.createSequentialGroup()
+                .addGroup(jpnConta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnTransfere2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnConta2Layout.createSequentialGroup()
                         .addGroup(jpnConta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lblSaldo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblConta2, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE))
                         .addGap(34, 34, 34)
                         .addGroup(jpnConta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblNome2, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                            .addComponent(lblValor2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jpnConta2Layout.createSequentialGroup()
+                            .addComponent(lblValor2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnConta2Layout.createSequentialGroup()
                         .addGroup(jpnConta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnSaque2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                             .addComponent(txtValor2, javax.swing.GroupLayout.Alignment.LEADING))
@@ -204,7 +239,9 @@ public class Terminal extends javax.swing.JFrame {
                 .addGroup(jpnConta2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaque2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDeposito2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTransfere2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -214,7 +251,7 @@ public class Terminal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jpnConta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
                 .addComponent(jpnConta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -233,10 +270,21 @@ public class Terminal extends javax.swing.JFrame {
 
     private void btnSaque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaque1ActionPerformed
         // TODO add your handling code here:
-        double valor = Double.parseDouble(txtValor1.getText());
-        conta1.sacar(valor);
+        try{
+            double valor = Double.parseDouble(txtValor1.getText());
+            boolean operacao = conta1.sacar(valor);
+            if(operacao == true){
+                //saque deu certo
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Saque Realizado", 'i');
+            }else{
+                //saque não realizado
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Saque Não Realizado", 'e');
+            }
         
         imprimeConta1();
+        }catch(Exception ex){
+            System.err.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btnSaque1ActionPerformed
 
     private void btnDeposito1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeposito1ActionPerformed
@@ -262,6 +310,43 @@ public class Terminal extends javax.swing.JFrame {
         
         imprimeConta2();
     }//GEN-LAST:event_btnDeposito2ActionPerformed
+
+    private void btnTransfere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransfere1ActionPerformed
+        // TODO add your handling code here:
+        try{        
+            double valor = Double.parseDouble(txtValor1.getText());
+            if(conta1.sacar(valor)){
+                conta2.depositar(valor);
+                imprimeConta1();
+                imprimeConta2();
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Transferência realizada!", 'i');
+            } else {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao realizar transferência.", 'e');
+            }
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnTransfere1ActionPerformed
+
+    private void btnTransfere2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransfere2ActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+            double valor = Double.parseDouble(txtValor2.getText());
+            if(conta2.sacar(valor)){
+                conta1.depositar(valor);
+                imprimeConta1();
+                imprimeConta2();
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Transferência realizada!", 'i');
+            } else {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao realizar transferência.", 'e');
+            }
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnTransfere2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,6 +375,13 @@ public class Terminal extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        try {
+            UIManager.setLookAndFeel( new FlatDarculaLaf());
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
+
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -303,6 +395,8 @@ public class Terminal extends javax.swing.JFrame {
     private javax.swing.JButton btnDeposito2;
     private javax.swing.JButton btnSaque1;
     private javax.swing.JButton btnSaque2;
+    private javax.swing.JButton btnTransfere1;
+    private javax.swing.JButton btnTransfere2;
     private javax.swing.JPanel jpnConta1;
     private javax.swing.JPanel jpnConta2;
     private javax.swing.JLabel lblConta1;
