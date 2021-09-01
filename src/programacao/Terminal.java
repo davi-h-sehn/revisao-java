@@ -297,10 +297,21 @@ public class Terminal extends javax.swing.JFrame {
 
     private void btnSaque2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaque2ActionPerformed
         // TODO add your handling code here:
-        double valor = Double.parseDouble(txtValor2.getText());
-        conta2.sacar(valor);
+        try{
+            double valor = Double.parseDouble(txtValor2.getText());
+            boolean operacao = conta2.sacar(valor);
+            if(operacao == true){
+                //saque deu certo
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Saque Realizado", 'i');
+            }else{
+                //saque não realizado
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Saque Não Realizado", 'e');
+            }
         
         imprimeConta2();
+        }catch(Exception ex){
+            System.err.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btnSaque2ActionPerformed
 
     private void btnDeposito2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeposito2ActionPerformed
